@@ -65,9 +65,19 @@ class AuthenticationController extends GetxController {
     }
   }
 
-
-
-
+  signInWithFacebook() async {
+    EasyLoading.show();
+    String result =
+        await Get.find<AuthServices>().facebookLogin();
+    EasyLoading.dismiss();
+    if (result == "") {
+      print(currentUser.username);
+      await Get.find<FirestoreServices>().registerUser();
+      Get.offAll(HomePage());
+    } else { EasyLoading.dismiss();
+      EasyLoading.showInfo(result);
+    }
+  }
 
   Future<bool> registerUser(DateTime dob) async {
     if (email.text.isEmpty) {

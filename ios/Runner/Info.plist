@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+
 <!-- Google Sign-in Section -->
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -13,10 +21,17 @@
 				<!-- TODO Replace this value: -->
 				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
 				<string>com.googleusercontent.apps.480422306650-68bqe86ft5irlft9ogr7fjn2rbjlg0sr</string>
+				 <string>fb223397697354791</string>
 			</array>
 		</dict>
 	</array>
 <!-- End of the Google Sign-in Section -->
+<key>FacebookAppID</key>
+<string>223397697354791</string>
+<key>FacebookClientToken</key>
+<string>a43b4d7e0986054e923995935924624d</string>
+<key>FacebookDisplayName</key>
+<string>Clone-App</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

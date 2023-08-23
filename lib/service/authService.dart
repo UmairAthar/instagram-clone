@@ -1,9 +1,13 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/userModel.dart';
-
+ 
+Map<String,dynamic>? _userData;
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<String> emailSignIn(String email, password) async {
@@ -44,6 +48,42 @@ class AuthServices {
       return e.toString();
     }
   }
+
+
+    facebookLogin() async {
+    try {
+      LoginResult facebookLoginResult =
+          await FacebookAuth.instance.login(permissions: ["public_profile","email"]);
+                    // if(facebookLoginResult.message==null)return 'cancelled';
+
+      if (facebookLoginResult.status == LoginStatus.success) {
+        String token = facebookLoginResult.accessToken!.token;
+        AuthCredential authCredential = FacebookAuthProvider.credential(token);
+        UserCredential fbUser =
+            await _auth.signInWithCredential(authCredential);
+        // Check if the fbUser contains a valid user object
+        if (fbUser.user != null) {
+          currentUser.id = fbUser.user?.uid??"";
+
+          currentUser.email = fbUser.user?.email ?? "";
+          currentUser.username = fbUser.user?.displayName ?? "";
+          return "";
+        }
+      } else if (facebookLoginResult.status == LoginStatus.cancelled) {
+        return("Cancelled");
+      } else if (facebookLoginResult.status == LoginStatus.failed) {
+        return("Failed");
+      }
+    } on FirebaseAuthException catch (error) {
+      FirebaseAuth.instance.signOut();
+      return error.message ?? error.code;
+    } catch (e) {
+      print(e);
+      return e.toString();
+    }
+  }
+
+
 
   checkUser() async {
     try {
