@@ -27,9 +27,9 @@
 	</array>
 <!-- End of the Google Sign-in Section -->
 <key>FacebookAppID</key>
-<string>FB_APP ID</string>
+<string>223397697354791</string>
 <key>FacebookClientToken</key>
-<string>Client Token</string>
+<string>a43b4d7e0986054e923995935924624d</string>
 <key>FacebookDisplayName</key>
 <string>Clone-App</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
