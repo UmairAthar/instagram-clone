@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/userModel.dart';
-
 
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,6 +18,30 @@ class AuthServices {
     } on FirebaseAuthException catch (error) {
       FirebaseAuth.instance.signOut();
       return error.message ?? error.code;
+    }
+  }
+
+  googleLogin() async {
+    try {
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+      if (gUser == null) return 'Cancelled';
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+      UserCredential fbUser = await _auth.signInWithCredential(credential);
+      if (fbUser.user != null) {
+        currentUser.id = fbUser.user?.uid ?? "";
+        currentUser.email=fbUser.user!.email!;
+        currentUser.username=fbUser.user!.displayName!;
+        return "";
+      }
+    } on FirebaseAuthException catch (error) {
+      FirebaseAuth.instance.signOut();
+      return error.message ?? error.code;
+    } catch (e) {
+      print(e);
+      return e.toString();
     }
   }
 
@@ -67,9 +91,9 @@ class AuthServices {
 
   Future<bool> logOut() async {
     try {
-    await _auth.signOut();
-    currentUser = UserModel();
-    return true;
+      await _auth.signOut();
+      currentUser = UserModel();
+      return true;
     } catch (e) {
       print(e);
     }

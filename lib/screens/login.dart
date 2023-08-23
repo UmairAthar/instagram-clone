@@ -114,29 +114,37 @@ class InstaLoginScreen extends StatelessWidget {
                             SizedBox(
                               height: 5.h,
                             ),
-                            Container(
-                              height: 5.h,
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
-                                  border:
-                                      Border.all(color: Colors.grey, width: 1)),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(11.0),
-                                      child: Image.asset(
-                                          "assets/logo/google_logo.png"),
-                                    ),
-                                    Text(
-                                      "Continue with Google",
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 16.sp, color: Colors.black),
-                                    )
-                                  ]),
+                            InkWell(
+                              onTap:() {
+                                con.signInWithGoogle();
+
+                              },
+                              child: Container(
+                                height: 5.h,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(12)),
+                                    border:
+                                        Border.all(color: Colors.grey, width: 1)),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(11.0),
+                                        child: Image.asset(
+                                            "assets/logo/google_logo.png"),
+                                      ),
+                                      Text(
+                                        "Continue with Google",
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 16.sp, color: Colors.black),
+                                      )
+                                    ]),
+                              ),
                             ),
+                            SizedBox(height: 2.h,),
+                            
                           ],
                         ),
                       ),

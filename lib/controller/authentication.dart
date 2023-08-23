@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/userModel.dart';
 import 'package:insta/screens/home.dart';
-import 'package:insta/screens/splash.dart';
 import 'package:insta/service/authService.dart';
 import 'package:insta/service/firestoreService.dart';
 
@@ -50,6 +49,25 @@ class AuthenticationController extends GetxController {
       EasyLoading.showError(result);
     }
   }
+
+
+  signInWithGoogle() async {
+    EasyLoading.show();
+    String result =
+        await Get.find<AuthServices>().googleLogin();
+    EasyLoading.dismiss();
+    if (result == "") {
+      print(currentUser.username);
+      await Get.find<FirestoreServices>().registerUser();
+      Get.offAll(HomePage());
+    } else { EasyLoading.dismiss();
+      EasyLoading.showInfo(result);
+    }
+  }
+
+
+
+
 
   Future<bool> registerUser(DateTime dob) async {
     if (email.text.isEmpty) {
