@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+
+#Remember to add Google API-Key in Google Services Info.Plist and Facebook Keys in Info.Plist file
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
