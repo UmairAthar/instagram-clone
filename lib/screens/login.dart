@@ -114,64 +114,31 @@ class InstaLoginScreen extends StatelessWidget {
                             SizedBox(
                               height: 5.h,
                             ),
-                            InkWell(
-                              onTap:() {
-                                con.signInWithGoogle();
-
-                              },
-                              child: Container(
-                                height: 5.h,
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(12)),
-                                    border:
-                                        Border.all(color: Colors.grey, width: 1)),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(11.0),
-                                        child: Image.asset(
-                                            "assets/logo/google_logo.png"),
-                                      ),
-                                      Text(
-                                        "Continue with Google",
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16.sp, color: Colors.black),
-                                      )
-                                    ]),
-                              ),
-                            ),
-                            SizedBox(height: 2.h,),
-                               InkWell(
-                              onTap:() {
-                                con.signInWithFacebook();
-
-                              },
-                              child: Container(
-                                height: 5.h,
-                                decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(12)),
-                                    border:
-                                        Border.all(color: Colors.grey, width: 1)),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(11.0),
-                                        child: Image.asset(
-                                            "assets/logo/fb_logo.png"),
-                                      ),
-                                      Text(
-                                        "Continue with Facebook",
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16.sp, color: Colors.black),
-                                      )
-                                    ]),
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    con.signInWithGoogle();
+                                  },
+                                  child: Image.asset(
+                                    "assets/logo/google_logo.png",
+                                    height: 4.h,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    con.signInWithFacebook();
+                                  },
+                                  child: Image.asset(
+                                    "assets/logo/fb_logo.png",
+                                    height: 4.h,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

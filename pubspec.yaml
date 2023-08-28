@@ -61,6 +61,8 @@ dependencies:
   carousel_slider: ^4.2.1
   google_sign_in: ^6.1.4
   flutter_facebook_auth: any
+  uuid: ^3.0.7
+  timeago: ^3.5.0
 
 dev_dependencies:
   flutter_test:

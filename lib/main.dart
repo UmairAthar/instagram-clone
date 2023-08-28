@@ -10,6 +10,7 @@ import 'package:insta/screens/postDetails.dart';
 import 'package:insta/screens/signUp.dart';
 import 'package:insta/screens/splash.dart';
 import 'package:insta/service/authService.dart';
+import 'package:insta/service/chatServices.dart';
 import 'package:insta/service/firestoreService.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -39,6 +40,7 @@ onInit() async {
   await Firebase.initializeApp();
   Get.put(AuthServices());
   Get.put(FirestoreServices());
+  Get.put(ChatServices());
   
 }
 

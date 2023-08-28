@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:insta/config/colors.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/postModel.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -210,4 +211,57 @@ Widget postCard(PostModel post)  {
     ),
   );
 }
+
+
+
+
+Widget chatWidget(
+    {ontap,
+    String title = "Jimmy Johnson",
+    title2 =
+        "It is a long established fact that a reader will be distracted by the readable",
+    time = "10:51 AM",
+    img = "assets/images/img1.png"}) {
+  return InkWell(
+    onTap: ontap,
+    splashColor: Colors.transparent,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Card(
+        // elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          leading: CircleAvatar(
+            radius: 2.5.h,
+            backgroundColor: Colors.white,
+            child: Icon(Icons.person),
+          ),
+          title: Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.poppins(
+                    color: MyColors.black,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600),
+              ),
+              Spacer(),
+              Text(time,
+                  maxLines: 2,
+                  style: GoogleFonts.poppins(
+                      color: MyColors.grey2, fontSize: 14.sp))
+            ],
+          ),
+          subtitle: Text(
+            title2,
+            maxLines: 2,
+            style: GoogleFonts.poppins(color: MyColors.grey2, fontSize: 14.sp),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 

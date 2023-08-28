@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta/controller/post.dart';
 import 'package:insta/models/postModel.dart';
+import 'package:insta/screens/chatList.dart';
 import 'package:insta/screens/login.dart';
 import 'package:insta/screens/postDetails.dart';
 import 'package:insta/screens/splash.dart';
@@ -30,6 +31,13 @@ class HomePage extends StatelessWidget {
                 ),
                 centerTitle: false,
                 actions: [
+                   InkWell(
+                    onTap: () {
+                      Get.to(ChatLists());
+                    },
+                    child:
+                    Icon(Icons.message_rounded,color: Colors.white,size: 3.h,)),
+                  SizedBox(width: 5.w,),
                   InkWell(
                       splashColor: Colors.transparent,
                       onTap: () async {

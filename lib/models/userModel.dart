@@ -2,6 +2,7 @@ class UserModel {
   String id = '';
   String email = '';
   String username = "";
+  String fcm = '';
   DateTime dob = DateTime.now();
   UserModel();
 
@@ -9,6 +10,7 @@ class UserModel {
     id = jsonMap['id'];
     username = jsonMap['username'];
     email = jsonMap['email'];
+    fcm = jsonMap['fcm'];
     dob =jsonMap['dob']!=null? jsonMap['dob'].toDate():DateTime.now();
 
   }
@@ -18,6 +20,7 @@ class UserModel {
     jsonMap['id'] = id;
     jsonMap['email'] = email;
     jsonMap['username'] = username;
+    jsonMap['fcm'] = fcm;
     jsonMap['dob'] = dob;
 
     return jsonMap;
