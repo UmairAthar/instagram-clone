@@ -23,13 +23,13 @@ TextEditingController cont = TextEditingController();
 class _ChatPageUserState extends State<ChatPageUser> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       resizeToAvoidBottomInset: true,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(7.h),
         child: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             centerTitle: true,
             elevation: 0,
             leading: Padding(
@@ -40,7 +40,7 @@ class _ChatPageUserState extends State<ChatPageUser> {
                       Get.back();
                     },
                     child:
-                        const Icon(Icons.arrow_back_ios_new, color: Colors.black))),
+                        const Icon(Icons.arrow_back_ios_new, color: Colors.white))),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 12.0),
@@ -50,7 +50,7 @@ class _ChatPageUserState extends State<ChatPageUser> {
                     Text(
                       widget.data['name'],
                       style: GoogleFonts.montserrat(
-                          color: MyColors.black,
+                          color: MyColors.white,
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w600),
                     ),
@@ -64,22 +64,24 @@ class _ChatPageUserState extends State<ChatPageUser> {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom + 6),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Divider(thickness: 1, color: MyColors.blue1),
+              const Divider(thickness: 1, color: Colors.deepPurple),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14.0),
                   child: Row(children: [
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5),
+                            horizontal: 10.0, vertical: 10),
                         child: TextField(
                             controller: cont,
                             onChanged: (value) {
                               setState(() {});
                             },
                             style: GoogleFonts.montserrat(
-                                fontSize: 15.sp, color: MyColors.black),
+                                fontSize: 15.sp, color: MyColors.white),
+
                             decoration: InputDecoration(
+                              
                                 prefixIconConstraints: BoxConstraints(
                                     maxWidth: 10.w, maxHeight: 3.h),
                                 enabledBorder: OutlineInputBorder(
@@ -92,7 +94,7 @@ class _ChatPageUserState extends State<ChatPageUser> {
                                         color: Colors.transparent)),
                                 hintText: "Enter Message".tr,
                                 hintStyle: GoogleFonts.montserrat(
-                                    fontSize: 15.sp, color: MyColors.black),
+                                    fontSize: 15.sp, color: MyColors.white),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10))),
                       ),
@@ -136,7 +138,7 @@ class _ChatPageUserState extends State<ChatPageUser> {
                         //   setState(() {});
                         // },
                         child:
-                            Image.asset("assets/icons/send.png", height: 2.7.h))
+                            Image.asset("assets/icons/send.png",height: 2.5.h,color: Colors.deepPurple,))
                   ]))
             ])),
       ),
@@ -145,8 +147,8 @@ class _ChatPageUserState extends State<ChatPageUser> {
         child: PaginateFirestore(
             key: Key('friendMessages:${widget.data["id"]}'),
             onEmpty: Padding(
-                padding: EdgeInsets.only(bottom: 30.h),
-                child: Text("No chat found".tr,
+                padding: EdgeInsets.only(bottom: 15.h),
+                child: Text("No chat found",
                     style: GoogleFonts.abel(
                         color: Colors.white,
                         fontSize: 18,

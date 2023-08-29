@@ -9,6 +9,7 @@ import 'package:insta/screens/login.dart';
 import 'package:insta/screens/postDetails.dart';
 import 'package:insta/screens/signUp.dart';
 import 'package:insta/screens/splash.dart';
+import 'package:insta/screens/usersList.dart';
 import 'package:insta/service/authService.dart';
 import 'package:insta/service/chatServices.dart';
 import 'package:insta/service/firestoreService.dart';
@@ -41,7 +42,7 @@ onInit() async {
   Get.put(AuthServices());
   Get.put(FirestoreServices());
   Get.put(ChatServices());
-  
+  getAllUsers();
 }
 
 

@@ -10,11 +10,28 @@ import 'package:insta/screens/splash.dart';
 import 'package:insta/screens/widgets.dart';
 import 'package:insta/service/authService.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-import 'package:paginate_firestore/widgets/initial_loader.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-class HomePage extends StatelessWidget {
+bool enable = true;
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData()async{
+    await Future.delayed(Duration(seconds: 4));
+    setState(() {
+      enable = false;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PostController>(
@@ -67,7 +84,7 @@ class HomePage extends StatelessWidget {
                   PostModel post = PostModel();
                   final data = documentSnapshots[index].data();
                   post = PostModel.toModel(data);
-                  return postCard(post);
+                  return postCard(post,enable);
                 },
                 query: FirebaseFirestore.instance
                     .collection('posts')

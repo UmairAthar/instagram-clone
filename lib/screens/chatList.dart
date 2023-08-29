@@ -5,6 +5,7 @@ import 'package:insta/chatUi/userChatPage.dart';
 import 'package:insta/config/colors.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/controller/homeController.dart';
+import 'package:insta/screens/usersList.dart';
 import 'package:insta/screens/widgets.dart';
 import 'package:insta/service/chatServices.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -17,7 +18,7 @@ class ChatLists extends StatelessWidget {
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (HomeController _) => Scaffold(
-          backgroundColor: Colors.black,
+            backgroundColor: Colors.black,
             body: InkWell(
                 splashColor: Colors.transparent,
                 onTap: () {
@@ -38,12 +39,19 @@ class ChatLists extends StatelessWidget {
                                       Row(
                                         children: [
                                           InkWell(
-                                            onTap: () {
-                                              Get.back();
-                                            },
-                                            child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 3.h,)),
+                                              onTap: () {
+                                                Get.back();
+                                              },
+                                              child: const Icon(
+                                                Icons.arrow_back_ios_new,
+                                                color: Colors.white,
+                                                
+                                              )),
                                           const Spacer(),
-                                          const Icon(Icons.more_vert_outlined,color: Colors.white,)
+                                          const Icon(
+                                            Icons.more_vert_outlined,
+                                            color: Colors.white,
+                                          )
                                         ],
                                       ),
                                       SizedBox(height: 3.h),
@@ -97,13 +105,24 @@ class ChatLists extends StatelessWidget {
                                             onEmpty: Padding(
                                                 padding: EdgeInsets.only(
                                                     bottom: 30.h),
-                                                child: Text(
-                                                    "No Conversation Found".tr,
-                                                    style: GoogleFonts.abel(
-                                                        color: Colors.white,
-                                                        fontSize: 18,
-                                                        wordSpacing: 1.5,
-                                                        letterSpacing: .5))),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                       Get.to(const UsersScreen());
+                                                      },
+                                                      child:  CircleAvatar(radius: 3.h,backgroundColor: Colors.deepPurple,child: Icon(Icons.add,color: Colors.white,),)),
+                                                    SizedBox(height: 3.h,),
+                                                    Text(
+                                                        "No Conversation Found".tr,
+                                                        style: GoogleFonts.abel(
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            wordSpacing: 1.5,
+                                                            letterSpacing: .5)),
+                                                  ],
+                                                )),
                                             initialLoader: Padding(
                                                 padding: EdgeInsets.only(
                                                     bottom: 45.h),

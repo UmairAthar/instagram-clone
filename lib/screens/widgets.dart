@@ -4,9 +4,11 @@ import 'package:insta/config/colors.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/postModel.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:shimmer_image/shimmer_image.dart';
 
 Widget textFieldWithIconAndHintText(String hintText, String iconName,
-    {color,TextEditingController? textEditingController, isObscure = false}) {
+    {color, TextEditingController? textEditingController, isObscure = false}) {
   return Container(
     height: 5.2.h,
     //width: 100.w,
@@ -15,8 +17,8 @@ Widget textFieldWithIconAndHintText(String hintText, String iconName,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         border: Border.all(color: Colors.grey, width: 0.5)),
     child: TextField(
-      controller: textEditingController??TextEditingController(),
-      obscureText: isObscure? true: false,
+      controller: textEditingController ?? TextEditingController(),
+      obscureText: isObscure ? true : false,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.montserrat(
@@ -35,8 +37,6 @@ Widget textFieldWithIconAndHintText(String hintText, String iconName,
     ),
   );
 }
-
-
 
 InkWell primaryButton(String text, Function? onTap, {Color? color}) {
   return InkWell(
@@ -59,9 +59,10 @@ InkWell primaryButton(String text, Function? onTap, {Color? color}) {
   );
 }
 
-
 Widget textFieldWithHintText(String hintText,
-    {Color? color, int maxline = 1, TextEditingController? textEditingController}) {
+    {Color? color,
+    int maxline = 1,
+    TextEditingController? textEditingController}) {
   return Container(
     // height: 4.5.h,
     width: 100.w,
@@ -72,7 +73,7 @@ Widget textFieldWithHintText(String hintText,
     child: TextField(
       maxLines: maxline,
       style: const TextStyle(color: Colors.white),
-      controller: textEditingController?? TextEditingController(),
+      controller: textEditingController ?? TextEditingController(),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.montserrat(
@@ -88,11 +89,9 @@ Widget textFieldWithHintText(String hintText,
   );
 }
 
-
-
-Widget postCard(PostModel post)  {
+Widget postCard(PostModel post, bool enable) {
   return Container(
-   // height: 30.h,
+    // height: 30.h,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,31 +102,62 @@ Widget postCard(PostModel post)  {
           padding: EdgeInsets.symmetric(horizontal: 2.w),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: 3.h,
-                backgroundImage:
-                    const AssetImage("assets/walk_through/man.jpg"),
-              ),
+              enable
+                  ? Shimmer.fromColors(
+                      enabled: enable,
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade200,
+                      child: CircleAvatar(
+                        radius: 3.h,
+                        backgroundColor: Colors.white,
+                      ),
+                    )
+                  : CircleAvatar(
+                      radius: 3.h,
+                      backgroundImage:
+                          const AssetImage("assets/walk_through/man.jpg"),
+                    ),
               SizedBox(
                 width: 4.w,
               ),
-              currentUser.id.isNotEmpty
-                  ? 
-                  Text(
-                     currentUser.username ,
-                      style: GoogleFonts.pacifico(
-                          color: Colors.white, fontSize: 17.sp),
-                    )
-                  : Text(
-                      "GuestUser",
-                      style: GoogleFonts.pacifico(
-                          color: Colors.white, fontSize: 17.sp),
-                    ),
+              enable
+                  ? Shimmer.fromColors(
+                      child: Container(
+                        height: 2.h,
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade200)
+                  : currentUser.id.isNotEmpty
+                      ? Text(
+                          currentUser.username,
+                          style: GoogleFonts.pacifico(
+                              color: Colors.white, fontSize: 17.sp),
+                        )
+                      : Text(
+                          "GuestUser",
+                          style: GoogleFonts.pacifico(
+                              color: Colors.white, fontSize: 17.sp),
+                        ),
               const Spacer(),
-              const Icon(
-                Icons.more_vert,
-                color: Colors.white,
-              )
+              enable
+                  ? Shimmer.fromColors(
+                      child: Container(
+                        height: 4.h,
+                        width: 3.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade200)
+                  : const Icon(
+                      Icons.more_vert,
+                      color: Colors.white,
+                    )
             ],
           ),
         ),
@@ -138,82 +168,113 @@ Widget postCard(PostModel post)  {
         // Image.network(      //for showing post details of relevant owner
         //   post.image,
         // ): SizedBox(),
-        Image.network(post.image),
+        ProgressiveImage(
+          image: post.image,
+          height: 30.h,
+          width: 100.w,
+          baseColor: Colors.grey.shade500,
+          highlightColor: Colors.grey.shade200,
+        ),
         SizedBox(
           height: 1.5.h,
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w),
-          child: Row(
-            children: [
-              Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-                size: 3.5.h,
-              ),
-              SizedBox(
-                width: 5.w,
-              ),
-              Icon(
-                Icons.chat_outlined,
-                color: Colors.white,
-                size: 3.5.h,
-              ),
-              SizedBox(
-                width: 5.w,
-              ),
-              Icon(
-                Icons.send,
-                color: Colors.white,
-                size: 3.5.h,
-              ),
-              const Spacer(),
-              Icon(
-                Icons.bookmark_border,
-                color: Colors.white,
-                size: 3.5.h,
+        enable
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Shimmer.fromColors(
+                    child: Container(
+                      height: 3.h,
+                      width: 100.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    baseColor: Colors.grey.shade500,
+                    highlightColor: Colors.grey.shade200),
               )
-            ],
-          ),
-        ),
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
+                      size: 3.5.h,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Icon(
+                      Icons.chat_outlined,
+                      color: Colors.white,
+                      size: 3.5.h,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Icon(
+                      Icons.send,
+                      color: Colors.white,
+                      size: 3.5.h,
+                    ),
+                    const Spacer(),
+                    Icon(
+                      Icons.bookmark_border,
+                      color: Colors.white,
+                      size: 3.5.h,
+                    )
+                  ],
+                ),
+              ),
         SizedBox(
           height: 2.h,
         ),
-        Row(
-          children: [
-            SizedBox(
-              width: 2.w,
-            ),
-            post.description.isNotEmpty
-                ? Text(
-                    //post.ownerId == currentUser.id? "${currentUser.username} :": "",    //for showing post details of relevant owner
-                  "${currentUser.username} :" ,
-                    style: GoogleFonts.pacifico(
-                        color: Colors.white, fontSize: 16.sp),
-                  )
-                : const SizedBox(),
-            SizedBox(
-              width: 2.w,
-            ),
-            post.description.isNotEmpty
-                ? Text(
-                  // post.id == currentUser.id? post.description: "",      //for showing post details of relevant owner
-                  post.description,
-                    style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500),
-                  )
-                : const SizedBox()
-          ],
-        )
+        enable
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Shimmer.fromColors(
+                    child: Container(
+                      height: 3.h,
+                      width: 50.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    baseColor: Colors.grey.shade500,
+                    highlightColor: Colors.grey.shade200),
+              )
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Row(
+                  children: [
+                    post.description.isNotEmpty
+                        ? Text(
+                            //post.ownerId == currentUser.id? "${currentUser.username} :": "",    //for showing post details of relevant owner
+                            "${currentUser.username} :",
+                            style: GoogleFonts.pacifico(
+                                color: Colors.white, fontSize: 16.sp),
+                          )
+                        : const SizedBox(),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    post.description.isNotEmpty
+                        ? Text(
+                            // post.id == currentUser.id? post.description: "",      //for showing post details of relevant owner
+                            post.description,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500),
+                          )
+                        : const SizedBox()
+                  ],
+                ),
+              )
       ],
     ),
   );
 }
-
-
-
 
 Widget chatWidget(
     {ontap,
@@ -228,21 +289,29 @@ Widget chatWidget(
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Card(
+        color: Colors.deepPurple.withOpacity(0.4),
         // elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           leading: CircleAvatar(
-            radius: 2.5.h,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person),
+            radius: 3.h,
+            backgroundColor: Colors.grey,
+            child: Icon(
+              Icons.person,
+              color: Colors.black,
+              size: 3.5.h,
+            ),
           ),
           title: Row(
             children: [
               Text(
                 title,
                 style: GoogleFonts.poppins(
-                    color: MyColors.black,
+                    color: MyColors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600),
               ),
@@ -263,5 +332,3 @@ Widget chatWidget(
     ),
   );
 }
-
-

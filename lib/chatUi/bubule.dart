@@ -38,11 +38,11 @@ class Bubble extends StatelessWidget {
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w500,
                             fontSize: 13.sp,
-                            color: MyColors.black)),
+                            color: MyColors.grey)),
                     SizedBox(width: 2.w),
                     Container(
                         decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Colors.deepPurple,
                             border: Border.all(width: 0.2),
                             borderRadius: BorderRadius.circular(12)),
                         child: SizedBox(
@@ -53,16 +53,13 @@ class Bubble extends StatelessWidget {
                                     textDirection: TextDirection.ltr,
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15.sp,
-                                        color: MyColors.black))))),
+                                        color: MyColors.white))))),
                   ]))
           : Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
               Container(
                   decoration: BoxDecoration(
-                      color: MyColors.bGrey,
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(6),
-                          bottomLeft: Radius.circular(6),
-                          bottomRight: Radius.circular(6))),
+                      color:Colors.grey.shade800,
+                      borderRadius:  BorderRadius.circular(12)),
                   child: SizedBox(
                       width: 60.w,
                       child: Padding(
@@ -70,13 +67,13 @@ class Bubble extends StatelessWidget {
                           child: Text(
                             msg.message,
                             style: GoogleFonts.montserrat(
-                                fontSize: 15.sp, color: MyColors.black),
+                                fontSize: 15.sp, color: MyColors.white),
                           )))),
               SizedBox(width: 2.w),
               Text('03:33',
                   style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w500,
                       fontSize: 13.sp,
-                      color: MyColors.black))
+                      color: MyColors.grey))
             ]));
 }

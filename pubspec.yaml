@@ -63,6 +63,9 @@ dependencies:
   flutter_facebook_auth: any
   uuid: ^3.0.7
   timeago: ^3.5.0
+  shimmer_image: ^0.0.2
+  shimmer: 
+  # fancy_shimmer_image: ^2.0.3
 
 dev_dependencies:
   flutter_test:
