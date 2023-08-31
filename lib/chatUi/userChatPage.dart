@@ -48,7 +48,7 @@ class _ChatPageUserState extends State<ChatPageUser> {
                   children: [
                     SizedBox(width: 2.w),
                     Text(
-                      widget.data['name'],
+                      widget.data['name']??widget.data['username'],
                       style: GoogleFonts.montserrat(
                           color: MyColors.white,
                           fontSize: 17.sp,

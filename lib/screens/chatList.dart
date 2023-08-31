@@ -45,9 +45,24 @@ class ChatLists extends StatelessWidget {
                                               child: const Icon(
                                                 Icons.arrow_back_ios_new,
                                                 color: Colors.white,
-                                                
                                               )),
                                           const Spacer(),
+                                          InkWell(
+                                              onTap: () {
+                                                Get.to(const UsersScreen());
+                                              },
+                                              child: CircleAvatar(
+                                                radius: 2.h,
+                                                backgroundColor:
+                                                    Colors.grey.shade700,
+                                                child: const Icon(
+                                                  Icons.add,
+                                                  color: Colors.white,
+                                                ),
+                                              )),
+                                          SizedBox(
+                                            width: 3.w,
+                                          ),
                                           const Icon(
                                             Icons.more_vert_outlined,
                                             color: Colors.white,
@@ -106,16 +121,12 @@ class ChatLists extends StatelessWidget {
                                                 padding: EdgeInsets.only(
                                                     bottom: 30.h),
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                       Get.to(const UsersScreen());
-                                                      },
-                                                      child:  CircleAvatar(radius: 3.h,backgroundColor: Colors.deepPurple,child: Icon(Icons.add,color: Colors.white,),)),
-                                                    SizedBox(height: 3.h,),
                                                     Text(
-                                                        "No Conversation Found".tr,
+                                                        "No Conversation Found"
+                                                            .tr,
                                                         style: GoogleFonts.abel(
                                                             color: Colors.white,
                                                             fontSize: 18,
@@ -127,47 +138,91 @@ class ChatLists extends StatelessWidget {
                                                 padding: EdgeInsets.only(
                                                     bottom: 45.h),
                                                 child: const Center(
-                                                    child: CircularProgressIndicator(
-                                                        strokeWidth: 2))),
-                                            itemBuilder: (context, documentSnapshots, index) {
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                            strokeWidth: 2))),
+                                            itemBuilder: (context,
+                                                documentSnapshots, index) {
                                               if (documentSnapshots[index]
                                                   .exists) {
                                                 Map<String, dynamic> data =
                                                     documentSnapshots[index]
                                                             .data()
                                                         as Map<String, dynamic>;
-                                                return chatWidget(
-                                                  ontap: () {
-                                                    data['id'] =
-                                                        documentSnapshots[index]
-                                                            .id;
-                                                    Get.to(() =>
-                                                        ChatPageUser(data));
-                                                  },
-                                                  title: data['name']
-                                                      .toString()
-                                                      .capitalizeFirst!,
-                                                  title2: (data['message'] ??
-                                                          "Click to send a message")
-                                                      .toString(),
-                                                  time: timeago.format(
-                                                      data['creationDate'] ==
-                                                              null
-                                                          ? data['dob'].toDate()
-                                                          : data['creationDate']
-                                                              .toDate(),
-                                                      locale: 'en_short'),
-                                                  // img:
-                                                );
+                                                // print(data);
+                                                return _.friendName.text
+                                                        .isNotEmpty
+                                                    ? _.friendName.text !=
+                                                            currentUser.username
+                                                        ? chatWidget(
+                                                            ontap: () {
+                                                              data['id'] =
+                                                                  documentSnapshots[
+                                                                          index]
+                                                                      .id;
+                                                              Get.to(() =>
+                                                                  ChatPageUser(
+                                                                      data));
+                                                            },
+                                                            title: data[
+                                                                    'username']
+                                                                .toString()
+                                                                .capitalizeFirst!,
+
+                                                            title2:
+                                                                ("Start Conversation")
+                                                                    .toString(),
+                                                            // time: timeago.format(
+                                                            //     data['creationDate'] ==
+                                                            //             null
+                                                            //         ? data['dob'].toDate()
+                                                            //         : data['creationDate']
+                                                            //             .toDate(),
+                                                            //     locale: 'en_short'),
+                                                            // img:
+                                                          )
+                                                        : const SizedBox()
+                                                    : chatWidget(
+                                                        ontap: () {
+                                                          data['id'] =
+                                                              documentSnapshots[
+                                                                      index]
+                                                                  .id;
+                                                          Get.to(() =>
+                                                              ChatPageUser(
+                                                                  data));
+                                                        },
+                                                        title: data['name']
+                                                            .toString()
+                                                            .capitalizeFirst!,
+
+                                                        title2: (data[
+                                                                    'message'] ??
+                                                                "Click to send a message")
+                                                            .toString(),
+                                                        time: timeago.format(
+                                                            data['creationDate'] ==
+                                                                    null
+                                                                ? data['dob']
+                                                                    .toDate()
+                                                                : data['creationDate']
+                                                                    .toDate(),
+                                                            locale: 'en_short'),
+                                                        // img:
+                                                      );
                                               } else {
                                                 return Container();
                                               }
                                             },
                                             query: _.friendName.text.isNotEmpty
                                                 ? Get.find<ChatServices>()
-                                                    .searchFriend(_.friendName.text)
-                                                : Get.find<ChatServices>().conversation(currentUser.id),
-                                            itemBuilderType: PaginateBuilderType.listView,
+                                                    .searchFriend(
+                                                        _.friendName.text)
+                                                : Get.find<ChatServices>()
+                                                    .conversation(
+                                                        currentUser.id),
+                                            itemBuilderType:
+                                                PaginateBuilderType.listView,
                                             isLive: true),
                                       )
                                     ])))

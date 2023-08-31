@@ -57,7 +57,7 @@ class ChatServices {
   Query searchFriend(String searchKey) {
     return _instance
         .collection('userProfile')
-        .where('searchParameter', arrayContains: searchKey)
+        .where('username', isEqualTo: searchKey)
         .orderBy('dob', descending: true);
   }
 

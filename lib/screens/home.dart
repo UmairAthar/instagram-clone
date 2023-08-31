@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       splashColor: Colors.transparent,
                       onTap: () async {
                         bool check = await Get.find<AuthServices>().logOut();
-                        if (check) Get.offAll(InstaLoginScreen());
+                        if (check) Get.offAll(const InstaLoginScreen());
                       },
                       child: const Icon(Icons.logout)),
                   const Icon(

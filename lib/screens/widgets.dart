@@ -122,15 +122,15 @@ Widget postCard(PostModel post, bool enable) {
               ),
               enable
                   ? Shimmer.fromColors(
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade200,
                       child: Container(
                         height: 2.h,
                         width: 20.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                      ),
-                      baseColor: Colors.grey.shade500,
-                      highlightColor: Colors.grey.shade200)
+                      ))
                   : currentUser.id.isNotEmpty
                       ? Text(
                           currentUser.username,
@@ -145,15 +145,15 @@ Widget postCard(PostModel post, bool enable) {
               const Spacer(),
               enable
                   ? Shimmer.fromColors(
+                      baseColor: Colors.grey.shade500,
+                      highlightColor: Colors.grey.shade200,
                       child: Container(
                         height: 4.h,
                         width: 3.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                      ),
-                      baseColor: Colors.grey.shade500,
-                      highlightColor: Colors.grey.shade200)
+                      ))
                   : const Icon(
                       Icons.more_vert,
                       color: Colors.white,
@@ -182,15 +182,15 @@ Widget postCard(PostModel post, bool enable) {
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Shimmer.fromColors(
+                    baseColor: Colors.grey.shade500,
+                    highlightColor: Colors.grey.shade200,
                     child: Container(
                       height: 3.h,
                       width: 100.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
-                    ),
-                    baseColor: Colors.grey.shade500,
-                    highlightColor: Colors.grey.shade200),
+                    )),
               )
             : Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
@@ -233,15 +233,15 @@ Widget postCard(PostModel post, bool enable) {
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Shimmer.fromColors(
+                    baseColor: Colors.grey.shade500,
+                    highlightColor: Colors.grey.shade200,
                     child: Container(
                       height: 3.h,
                       width: 50.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
-                    ),
-                    baseColor: Colors.grey.shade500,
-                    highlightColor: Colors.grey.shade200),
+                    )),
               )
             : Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
@@ -270,7 +270,8 @@ Widget postCard(PostModel post, bool enable) {
                         : const SizedBox()
                   ],
                 ),
-              )
+              ),
+              
       ],
     ),
   );
