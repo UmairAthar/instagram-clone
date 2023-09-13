@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta/config/global.dart';
+import 'package:insta/models/postModel.dart';
 import 'package:insta/screens/home.dart';
 
 
@@ -31,7 +32,8 @@ class PostController extends GetxController {
       Reference referenceRoot =
           FirebaseStorage.instance.ref().child('images/${DateTime.now()}');
       EasyLoading.show();
-      await referenceRoot.putFile(image!);
+     // await referenceRoot.putFile(image!);
+      await referenceRoot.putData(await image!.readAsBytes());
       imageUrl = await referenceRoot.getDownloadURL();
       post.image = imageUrl;
       post.ownerId = currentUser.id;
@@ -46,8 +48,32 @@ class PostController extends GetxController {
           Get.offAll(const HomePage());
       return true;
     } catch (error) {
+      EasyLoading.dismiss();
       print(error);
       return false;
     }
   }
+
+
+
+
+Future<bool> deletePost(PostModel post) async {
+  try {
+    await FirebaseStorage.instance.refFromURL(post.image).delete();
+    print("Storage Deleted");
+    await FirebaseFirestore.instance.collection('posts').doc(post.id).delete();
+     print("Document Deleted");
+    EasyLoading.dismiss();
+    Get.offAll(const HomePage());
+    return true;
+  } catch (error) {
+    print(error);
+    return false;
+  }
 }
+
+
+
+
+}
+

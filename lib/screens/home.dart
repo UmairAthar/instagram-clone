@@ -80,11 +80,12 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               body: PaginateFirestore(
+                onEmpty: Center(child: Text("No Posts Yet",style: TextStyle(color: Colors.white,fontSize: 17.sp),)),
                 itemBuilder: (context, documentSnapshots, index) {
                   PostModel post = PostModel();
                   final data = documentSnapshots[index].data();
                   post = PostModel.toModel(data);
-                  return postCard(post,enable);
+                  return postCard(post,enable,con);
                 },
                 query: FirebaseFirestore.instance
                     .collection('posts')

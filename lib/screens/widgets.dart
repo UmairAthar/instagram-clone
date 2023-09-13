@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:insta/config/colors.dart';
 import 'package:insta/config/global.dart';
+import 'package:insta/controller/post.dart';
 import 'package:insta/models/postModel.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
@@ -89,7 +90,7 @@ Widget textFieldWithHintText(String hintText,
   );
 }
 
-Widget postCard(PostModel post, bool enable) {
+Widget postCard(PostModel post, bool enable,PostController con) {
   return Container(
     // height: 30.h,
     child: Column(
@@ -154,10 +155,15 @@ Widget postCard(PostModel post, bool enable) {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
                       ))
-                  : const Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    )
+                  : InkWell(
+                    onTap: () {
+                      con.deletePost(post);                  
+                    },
+                    child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                  )
             ],
           ),
         ),

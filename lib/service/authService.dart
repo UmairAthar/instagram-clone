@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta/config/global.dart';
 import 'package:insta/models/userModel.dart';
  
-Map<String,dynamic>? _userData;
 class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<String> emailSignIn(String email, password) async {
@@ -16,6 +15,7 @@ class AuthServices {
           email: email, password: password);
       if (fbUser.user != null) {
         currentUser.id = fbUser.user?.uid ?? "";
+        
         return "";
       }
       return "error";

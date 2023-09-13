@@ -217,7 +217,7 @@ class ChatLists extends StatelessWidget {
                                             query: _.friendName.text.isNotEmpty
                                                 ? Get.find<ChatServices>()
                                                     .searchFriend(
-                                                        _.friendName.text)
+                                                        _.friendName.text.capitalizeFirst!)
                                                 : Get.find<ChatServices>()
                                                     .conversation(
                                                         currentUser.id),
